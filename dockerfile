@@ -18,11 +18,10 @@ COPY ./turbo.json tsconfig*.json ./
 RUN npm run build
 
 FROM base AS runner
-ENV NODE_ENV=production
+ENV NODE_ENV=production STORAGE_MODE=docker
 
-RUN npm install --workspaces --include-workspace-root --omit=dev 
+RUN npm install --workspaces --include-workspace-root --omit=dev && npm cache clean --force
 
-ENV STORAGE_MODE=docker
 RUN mkdir ./storage
 
 COPY --from=build \
