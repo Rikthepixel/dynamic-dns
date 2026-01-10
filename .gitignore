@@ -1,0 +1,20 @@
+# TypeScript cache
+*.tsbuildinfo
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.example
+
+# Build
+dist
+**/dist
+
+# Deps
+node_modules
+
+# Monorepo
+.turbo
+
+storage
+clients/**/storage

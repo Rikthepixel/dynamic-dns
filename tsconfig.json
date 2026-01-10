@@ -1,0 +1,13 @@
+{
+"compilerOptions": {
+    "paths": {
+      "@packages/*": ["packages/*/*"],
+      "@clients/*": ["clients/*/*"]
+    }
+  },
+  "references": [
+    { "path": "packages/scheduler" },
+    { "path": "clients/mijndomein" },
+    { "path": "clients/cloudflare" }
+  ]
+}

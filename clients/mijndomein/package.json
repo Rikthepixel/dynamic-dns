@@ -1,0 +1,22 @@
+{
+  "name": "@clients/mijndomein",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsup",
+    "postinstall": "npx -y playwright install --with-deps"
+  },
+  "dependencies": {
+    "@packages/scheduler": "*",
+    "playwright": "^1.57.0",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0"
+  }
+}

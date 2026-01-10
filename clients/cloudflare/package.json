@@ -1,0 +1,17 @@
+{
+  "name": "@clients/cloudflare",
+  "type": "module",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup"
+  },
+  "dependencies": {
+    "@packages/scheduler": "*",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0"
+  }
+}

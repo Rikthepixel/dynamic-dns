@@ -1,0 +1,34 @@
+{
+  "name": "dynamic-dns",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://github.com/Rikthepixel/dynamic-dns-clients#readme",
+  "bugs": {
+    "url": "https://github.com/Rikthepixel/dynamic-dns-clients/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rikthepixel/dynamic-dns-clients.git"
+  },
+  "license": "GPL-3.0-only",
+  "author": "Rikthepixel",
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build"
+  },
+  "dependencies": {
+    "typescript": "^5.9.3"
+  },
+  "workspaces": [
+    "clients/*",
+    "packages/*"
+  ],
+  "volta": {
+    "node": "24.12.0",
+    "npm": "11.7.0"
+  },
+  "packageManager": "npm@11.7.0",
+  "devDependencies": {
+    "turbo": "^2.7.3"
+  }
+}

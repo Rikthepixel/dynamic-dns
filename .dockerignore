@@ -1,0 +1,14 @@
+storage
+
+dist
+
+node_modules
+
+**/.env
+.env
+
+**/dist
+
+.git
+.github
+clients/**/storage

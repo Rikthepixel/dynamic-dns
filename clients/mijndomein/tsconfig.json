@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@packages/scheduler": ["../../packages/scheduler/src/index.ts"]
+    }
+  },
+  "includes": ["src"],
+  "references": [
+    { "path": "../../packages/scheduler/tsconfig.json" }
+  ]
+}
