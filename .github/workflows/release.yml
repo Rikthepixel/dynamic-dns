@@ -7,7 +7,7 @@ on:
 
 concurrency:
   group: release
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   IMAGE_NAME: ${{ vars.DOCKERHUB_USER }}/dynamic-dns
