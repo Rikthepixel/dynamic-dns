@@ -1,4 +1,4 @@
-import { Result } from "../helpers/result.js";
+import { errorIntoResult, Result } from "../helpers/result.js";
 import { CanIHazIpIpProvider } from "./providers/can-i-haz-ip.js";
 import { CloudflareIpProvider } from "./providers/cloudflare.js";
 import { IpifyIpProvider } from "./providers/ipify.js";
@@ -24,7 +24,8 @@ export async function retrieveIpv4(
     if (result.isError) continue;
     return result;
   }
-  throw new NoAvailableProvidersError();
+
+  return errorIntoResult(new NoAvailableProvidersError());
 }
 
 export async function retrieveIpv6(
@@ -35,5 +36,5 @@ export async function retrieveIpv6(
     if (result.isError) continue;
     return result;
   }
-  throw new NoAvailableProvidersError();
+  return errorIntoResult(new NoAvailableProvidersError());
 }
