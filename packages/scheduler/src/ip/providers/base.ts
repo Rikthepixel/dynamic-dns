@@ -25,8 +25,6 @@ export function isIpv6Error(err: unknown): err is TypeError {
   return (
     err instanceof TypeError &&
     err.cause instanceof Error &&
-    "code" in err.cause &&
-    err.cause.code === "ENOENT" &&
     "syscall" in err.cause &&
     err.cause.syscall === "getaddrinfo"
   );
