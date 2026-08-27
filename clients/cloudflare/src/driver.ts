@@ -111,6 +111,7 @@ export class CloudflareDriver implements Driver {
       const deletes: DeleteDnsRecord[] = [];
 
       const records = await this.zoneRecords(zoneId);
+      const updatedAt = new Date();
 
       for (const [name, type] of dynamicRecords) {
         const recordTypes = TYPE_TO_DNS_TYPE[type];
@@ -151,7 +152,7 @@ export class CloudflareDriver implements Driver {
             continue;
           } else if (existingRecord) {
             existingRecord.content = content;
-            existingRecord.comment = "Dynamic DNS Client";
+            existingRecord.comment = `Dynamic DNS Client (${updatedAt.toUTCString()})`;
             patches.push(existingRecord);
 
             console.log(
@@ -168,7 +169,7 @@ export class CloudflareDriver implements Driver {
             name,
             content: content,
             ttl: 1,
-            comment: "Dynamic DNS Client",
+            comment: `Dynamic DNS Client (${updatedAt.toUTCString())})`,
           });
 
           console.log("Creating record", recordType, name, content);
