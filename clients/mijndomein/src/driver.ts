@@ -67,7 +67,7 @@ export class MijnDomeinDriver implements Driver {
     await page.close();
   }
 
-  public async write(ipv4Address: string | null, ipv6Address: string | null) {
+  public async write(ipv4Address?: string | null, ipv6Address?: string | null) {
     for (const [dnsPackageId, dynamicRecords] of Object.entries(this.records)) {
       const dnsPackage = await this.package(parseInt(dnsPackageId));
       const topLevelDomain = await dnsPackage.topLevelDomain();

@@ -102,8 +102,8 @@ export class CloudflareDriver implements Driver {
   }
 
   async write(
-    ipv4Address: string | null,
-    ipv6Address: string | null,
+    ipv4Address?: string | null,
+    ipv6Address?: string | null,
   ): Promise<void> {
     for (const [zoneId, dynamicRecords] of Object.entries(this.records)) {
       const patches: DnsRecord[] = [];
@@ -120,6 +120,11 @@ export class CloudflareDriver implements Driver {
         }
 
         for (const recordType of recordTypes) {
+          const content = recordType === "A" ? ipv4Address : ipv6Address;
+          if (content === undefined) {
+            continue;
+          }
+
           const hasCName = records.some(
             (record) => record.type === "CNAME" && record.name === name,
           );
@@ -135,7 +140,6 @@ export class CloudflareDriver implements Driver {
             (record) => record.type === recordType && record.name === name,
           );
 
-          const content = recordType === "A" ? ipv4Address : ipv6Address;
           if (existingRecord && existingRecord.content === content) {
             continue;
           }
