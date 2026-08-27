@@ -2,8 +2,12 @@ import path from "path";
 import { retrieveIpv4, retrieveIpv6 } from "./ip.js";
 import { retrieveStorage, saveStorage } from "./storage.js";
 import { configDotenv } from "dotenv";
+import z from "zod/v4";
 
-configDotenv({ quiet: true, path: path.resolve(process.cwd(), "..", "..", ".env") });
+configDotenv({
+  quiet: true,
+  path: path.resolve(process.cwd(), "..", "..", ".env"),
+});
 configDotenv({ quiet: true });
 
 export interface Driver {
@@ -11,6 +15,13 @@ export interface Driver {
   keepAlive(): Promise<void>;
   write(ipv4Address: string | null, ipv6Address: string | null): Promise<void>;
 }
+
+const env = z
+  .object({
+    TICK_MS: z.coerce.number().default(30_000), // 30 Seconds
+    EXPIRY_MS: z.coerce.number().default(15 * 60 * 1000), // 15 Minutes
+  })
+  .parse(process.env);
 
 export class Scheduler {
   protected storagePath: string;
@@ -41,7 +52,7 @@ export class Scheduler {
     const now = new Date();
 
     const expired = previous.timestamp
-      ? now.getTime() - previous.timestamp.getTime() > 15 * 60 * 1000 // 15 Minutes
+      ? now.getTime() - previous.timestamp.getTime() > env.EXPIRY_MS
       : true;
 
     return (
@@ -81,6 +92,6 @@ export class Scheduler {
   }
 
   scheduleTick(force: boolean = false) {
-    setTimeout(() => this.tick(force), 30_000); // 30 Seconds
+    setTimeout(() => this.tick(force), env.TICK_MS); // 30 Seconds
   }
 }
