@@ -169,7 +169,7 @@ export class CloudflareDriver implements Driver {
             name,
             content: content,
             ttl: 1,
-            comment: `Dynamic DNS Client (${updatedAt.toUTCString())})`,
+            comment: `Dynamic DNS Client (${updatedAt.toUTCString()})`,
           });
 
           console.log("Creating record", recordType, name, content);
