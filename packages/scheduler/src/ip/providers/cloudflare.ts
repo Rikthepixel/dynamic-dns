@@ -40,7 +40,9 @@ export class CloudflareIpProvider extends IpProvider {
       );
     });
   }
-  retrieveIpv6(): Promise<Result<string | null>> {
-    throw new IpTypeNotImplementedError("v6");
+  async retrieveIpv6(): Promise<
+    Result<string | null, IpTypeNotImplementedError>
+  > {
+    return errorIntoResult(new IpTypeNotImplementedError("v6"));
   }
 }

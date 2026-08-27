@@ -1,4 +1,8 @@
-import { promiseIntoResult, Result } from "../../helpers/result.js";
+import {
+  errorIntoResult,
+  promiseIntoResult,
+  Result,
+} from "../../helpers/result.js";
 import {
   IpProvider,
   IpTypeNotImplementedError,
@@ -16,7 +20,7 @@ export class PlaintextProvider extends IpProvider {
 
   async retrieveIpv4(): Promise<Result<string | null>> {
     if (!this.ipv4Url) {
-      throw new IpTypeNotImplementedError("v4");
+      return errorIntoResult(new IpTypeNotImplementedError("v4"));
     }
     return promiseIntoResult(
       fetch(this.ipv4Url).then((res) => parsePlainTextResponse(res)),
@@ -25,7 +29,7 @@ export class PlaintextProvider extends IpProvider {
 
   async retrieveIpv6(): Promise<Result<string | null>> {
     if (!this.ipv6Url) {
-      throw new IpTypeNotImplementedError("v6");
+      return errorIntoResult(new IpTypeNotImplementedError("v6"));
     }
 
     return promiseIntoResult(
