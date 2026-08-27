@@ -3,8 +3,8 @@ import z from "zod/v4";
 
 const dataSchema = z.object({
   timestamp: z.coerce.date().nullable(),
-  ipv4Address: z.string().nullable(),
-  ipv6Address: z.string().nullable(),
+  ipv4Address: z.string().nullable().optional(),
+  ipv6Address: z.string().nullable().optional(),
 });
 
 export type Data = z.infer<typeof dataSchema>;
