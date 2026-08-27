@@ -23,7 +23,18 @@ export class CloudflareIpProvider extends IpProvider {
             return;
           }
 
-          resolve(valueIntoResult(stdout));
+          const ip = stdout
+            .trim()
+            .match(/^"(.*)"$/)
+            ?.at(1);
+
+          if (!ip) {
+            resolve(errorIntoResult(new Error("Couldn't parse output")));
+            process.kill();
+            return;
+          }
+
+          resolve(valueIntoResult(ip));
           process.kill();
         },
       );
