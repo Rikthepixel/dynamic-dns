@@ -1,4 +1,4 @@
-import { Result } from "src/helpers/result.js";
+import { Result } from "../helpers/result.js";
 import { CanIHazIpIpProvider } from "./providers/can-i-haz-ip.js";
 import { CloudflareIpProvider } from "./providers/cloudflare.js";
 import { IpifyIpProvider } from "./providers/ipify.js";

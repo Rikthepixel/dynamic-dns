@@ -2,7 +2,7 @@ import {
   errorIntoResult,
   Result,
   valueIntoResult,
-} from "src/helpers/result.js";
+} from "../../helpers/result.js";
 import { IpProvider, IpTypeNotImplementedError } from "./base.js";
 import { exec } from "child_process";
 

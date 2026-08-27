@@ -1,4 +1,4 @@
-import { Result } from "src/helpers/result.js";
+import { Result } from "../../helpers/result.js";
 
 export class IpTypeNotImplementedError extends Error {
   constructor(public ipType: "v4" | "v6") {

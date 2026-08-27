@@ -3,7 +3,7 @@ import { retrieveIpv4, retrieveIpv6 } from "./ip/index.js";
 import { retrieveStorage, saveStorage } from "./storage.js";
 import { configDotenv } from "dotenv";
 import z from "zod/v4";
-import { Result, ResultType } from "./helpers/result.js";
+import { Result } from "./helpers/result.js";
 import { IpProvider } from "./ip/providers/base.js";
 import { PlaintextProvider } from "./ip/providers/plaintext-provider.js";
 

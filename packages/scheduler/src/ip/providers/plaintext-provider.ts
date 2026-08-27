@@ -1,4 +1,4 @@
-import { promiseIntoResult, Result } from "src/helpers/result.js";
+import { promiseIntoResult, Result } from "../../helpers/result.js";
 import {
   IpProvider,
   IpTypeNotImplementedError,
