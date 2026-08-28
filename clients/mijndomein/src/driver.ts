@@ -68,6 +68,7 @@ export class MijnDomeinDriver implements Driver {
   }
 
   public async write(ipv4Address?: string | null, ipv6Address?: string | null) {
+    let anyRecordChanged = false;
     for (const [dnsPackageId, dynamicRecords] of Object.entries(this.records)) {
       const dnsPackage = await this.package(parseInt(dnsPackageId));
       const topLevelDomain = await dnsPackage.topLevelDomain();
@@ -105,6 +106,7 @@ export class MijnDomeinDriver implements Driver {
             if (existingIpv4.content === ipv4Address) {
               continue;
             }
+
             existingIpv4.content = ipv4Address;
             await dnsPackage.setRecord(existingIpv4);
             changed = true;
@@ -155,11 +157,13 @@ export class MijnDomeinDriver implements Driver {
       }
 
       if (changed) {
+        anyRecordChanged = true;
         await dnsPackage.saveChanges();
       }
 
       await dnsPackage.close();
     }
+    return anyRecordChanged;
   }
 
   async keepAlive() {
