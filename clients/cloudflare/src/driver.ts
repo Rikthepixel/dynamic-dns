@@ -104,7 +104,8 @@ export class CloudflareDriver implements Driver {
   async write(
     ipv4Address?: string | null,
     ipv6Address?: string | null,
-  ): Promise<void> {
+  ): Promise<boolean> {
+    let anyRecordsChanged = false;
     for (const [zoneId, dynamicRecords] of Object.entries(this.records)) {
       const patches: DnsRecord[] = [];
       const posts: PostDnsRecord[] = [];
@@ -180,7 +181,11 @@ export class CloudflareDriver implements Driver {
         }
       }
 
-      await this.batchRecords(zoneId, posts, patches, deletes);
+      if (posts.length > 0 || patches.length > 0 || deletes.length > 0) {
+        anyRecordsChanged = true;
+        await this.batchRecords(zoneId, posts, patches, deletes);
+      }
     }
+    return anyRecordsChanged;
   }
 }
